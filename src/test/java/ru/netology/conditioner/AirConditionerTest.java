@@ -7,10 +7,29 @@ import static org.junit.jupiter.api.Assertions.*;
 class AirConditionerTest {
 
     @Test
-    void setCurrentTemperature() {
-
-
+    void increaseTemperatureMoreThanMax() {
+        AirConditioner conditioner = new AirConditioner();
+        conditioner.setMaxTemperature(30);
+        conditioner.setMinTemperature(7);
+        conditioner.setCurrentTemperature(30);
+        conditioner.setOn(true);
+        conditioner.increaseCurrentTemperature();
+        int actual = conditioner.getCurrentTemperature();
+        assertEquals(conditioner.getMaxTemperature(), actual);
     }
+
+    @Test
+    void decreaseTemperatureLessThanMin() {
+        AirConditioner conditioner = new AirConditioner();
+        conditioner.setMaxTemperature(30);
+        conditioner.setMinTemperature(7);
+        conditioner.setCurrentTemperature(7);
+        conditioner.setOn(true);
+        conditioner.decreaseCurrentTemperature();
+        int actual = conditioner.getCurrentTemperature();
+        assertEquals(conditioner.getMinTemperature(), actual);
+    }
+
 
     @Test
     void increaseCurrentTemperature() {
