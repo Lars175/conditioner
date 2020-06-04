@@ -81,4 +81,23 @@ class AirConditionerTest {
 
         assertEquals(false, conditioner.isOn());
     }
+
+    @Test
+    public void aboveMaximumTemperature() {
+        AirConditioner conditioner = new AirConditioner();
+        conditioner.setOn(true);
+        conditioner.setCurrentTemperature(33);
+
+        assertEquals(true, conditioner.isOn());
+    }
+
+    @Test
+    public void aboveMimTemperature() {
+        AirConditioner conditioner = new AirConditioner();
+        conditioner.setOn(true);
+        conditioner.setCurrentTemperature(-1);
+
+        assertEquals(true, conditioner.isOn());
+    }
+
 }
