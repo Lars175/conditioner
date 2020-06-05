@@ -7,97 +7,92 @@ import static org.junit.jupiter.api.Assertions.*;
 class AirConditionerTest {
 
     @Test
-    void increaseTemperatureMoreThanMax() {
+    void increaseCurrentTemperature() {
+
         AirConditioner conditioner = new AirConditioner();
-        conditioner.setMaxTemperature(30);
-        conditioner.setMinTemperature(7);
-        conditioner.setCurrentTemperature(30);
         conditioner.setOn(true);
+        conditioner.setCurrentTemperature(23);
+        conditioner.increaseCurrentTemperature();
+        assertEquals(24, conditioner.getCurrentTemperature());
+
+    }
+
+    @Test
+    void decreaseCurrentTemperature() {
+
+        AirConditioner conditioner = new AirConditioner();
+        conditioner.setOn(true);
+        conditioner.setCurrentTemperature(8);
+        conditioner.decreaseCurrentTemperature();
+        assertEquals(7, conditioner.getCurrentTemperature());
+    }
+
+
+    @Test
+    void currentTemperatureMoreMaxTemperature() {
+
+        AirConditioner conditioner = new AirConditioner();
+        conditioner.setOn(true);
+        conditioner.setCurrentTemperature(34);
         conditioner.increaseCurrentTemperature();
         int actual = conditioner.getCurrentTemperature();
         assertEquals(conditioner.getMaxTemperature(), actual);
     }
 
+
     @Test
-    void decreaseTemperatureLessThanMin() {
+    public void currentTemperatureLessMinTemperature() {
+
         AirConditioner conditioner = new AirConditioner();
-        conditioner.setMaxTemperature(30);
-        conditioner.setMinTemperature(7);
-        conditioner.setCurrentTemperature(7);
         conditioner.setOn(true);
+        conditioner.setCurrentTemperature(3);
         conditioner.decreaseCurrentTemperature();
         int actual = conditioner.getCurrentTemperature();
         assertEquals(conditioner.getMinTemperature(), actual);
     }
 
-
     @Test
-    void increaseCurrentTemperature() {
+    void currentTemperatureEqualMaxTemperature() {
 
-        AirConditioner conditioner = new AirConditioner();
-
-//        conditioner.setMaxTemperature(30);
-//        conditioner.setMinTemperature(7);
-        conditioner.setCurrentTemperature(23);
-//        conditioner.setOn(true);
-        conditioner.increaseCurrentTemperature();
-        int expected = 24;
-        int actual = conditioner.getCurrentTemperature();
-
-        assertEquals(expected, actual);
-    }
-
-    @Test
-    public void decreaseCurrentTemperature() {
-
-        AirConditioner conditioner = new AirConditioner();
-
-//        conditioner.setMaxTemperature(30);
-//        conditioner.setMinTemperature(7);
-        conditioner.setCurrentTemperature(10);
-//        conditioner.setOn(true);
-        conditioner.decreaseCurrentTemperature();
-        int expected = 9;
-        int actual = conditioner.getCurrentTemperature();
-        assertEquals(expected, actual);
-    }
-
-    @Test
-    public void setOn() {
         AirConditioner conditioner = new AirConditioner();
         conditioner.setOn(true);
-        conditioner.setCurrentTemperature(10);
+        conditioner.setCurrentTemperature(30);
         conditioner.increaseCurrentTemperature();
-        assertEquals(11, conditioner.getCurrentTemperature());
-        assertEquals(true, conditioner.isOn());
+        int actual = conditioner.getCurrentTemperature();
+        assertEquals(actual, conditioner.getMaxTemperature());
     }
 
     @Test
-    public void setOff() {
+    void currentTemperatureEqualMinTemperature() {
+
+        AirConditioner conditioner = new AirConditioner();
+        conditioner.setOn(true);
+        conditioner.setCurrentTemperature(7);
+        conditioner.decreaseCurrentTemperature();
+        int actual = conditioner.getCurrentTemperature();
+        assertEquals(actual, conditioner.getMinTemperature());
+    }
+
+    @Test
+    void increaseCurrentTemperatureIsOff() {
+
         AirConditioner conditioner = new AirConditioner();
         conditioner.setOn(false);
-        conditioner.setCurrentTemperature(9);
-        assertEquals(9, conditioner.getCurrentTemperature());
-
+        conditioner.setCurrentTemperature(23);
+        conditioner.increaseCurrentTemperature();
+        assertEquals(23, conditioner.getCurrentTemperature());
         assertEquals(false, conditioner.isOn());
+
     }
 
     @Test
-    public void aboveMaximumTemperature() {
+    void decreaseCurrentTemperatureConditionerIsOFF() {
         AirConditioner conditioner = new AirConditioner();
-        conditioner.setOn(true);
-        conditioner.setCurrentTemperature(33);
-
-        assertEquals(true, conditioner.isOn());
-    }
-
-    @Test
-    public void aboveMimTemperature() {
-        AirConditioner conditioner = new AirConditioner();
-        conditioner.setOn(true);
-        conditioner.setCurrentTemperature(-1);
-
-        assertEquals(true, conditioner.isOn());
+        conditioner.setOn(false);
+        conditioner.setCurrentTemperature(8);
+        conditioner.decreaseCurrentTemperature();
+        assertEquals(8, conditioner.getCurrentTemperature());
+        assertEquals(false, conditioner.isOn());
     }
 
 }
