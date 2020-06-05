@@ -23,13 +23,6 @@ public class AirConditioner {
         return minTemperature;
     }
 
-    public void setMaxTemperature(int maxTemperature) {
-        this.maxTemperature = maxTemperature;
-    }
-
-    public void setMinTemperature(int minTemperature) {
-        this.minTemperature = minTemperature;
-    }
 
     public int getCurrentTemperature() {
         return currentTemperature;
